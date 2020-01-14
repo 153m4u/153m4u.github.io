@@ -17,12 +17,19 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">SELAMAT DATANG DI PORTAL PICAK.!</h1>
                   </div>
-                  <form class="user">
+                  <!-- Menampilkan Pesan Sukses dari halaman register-->
+<?= $this->session->flashdata('message');?>
+
+                  <!--TAMBAHAN method dan action supaya bisa menampilkan pesan error dibawah kolom-->
+              <!-- <form class="ser"> -->
+                  <form class="user" method="post" action="<?= base_url('auth');?>">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="no_hp" name="no_hp" aria-describedby="emailHelp" placeholder="Nomor Hp...">
+                      <input type="text" class="form-control form-control-user" id="no_hp" name="no_hp"  value="<?= set_value('no_hp');?>" placeholder="Nomor Hp...">
+                  <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>');?>
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password...">
+                      <?= form_error('password', '<small class="text-danger pl-3">', '</small>');?>
                     </div>
 <!--                    <div class="form-group">
                       <div class="custom-control custom-checkbox small">

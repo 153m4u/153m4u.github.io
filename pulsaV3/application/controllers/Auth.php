@@ -51,15 +51,15 @@ class Auth extends CI_Controller
         //INI MASIH ERROR DI VIDEO TUTOR KE 4 (MEMBUAT SISTEM LOGIN LENGKAP MENGGUNAKAN CODEIGNITER)
                     redirect ('landing');
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah..!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">** No_Hp / Password Salah..!</div>');
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Anda belum Tervalidasi..!!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">** Akun Belum Tervalidasi..!</div>');
                 redirect('auth');  
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Nomor Hp Belum Terdaftar.!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">** Nomor Hp Belum Terdaftar.!</div>');
             redirect('auth');
         }
 
@@ -70,11 +70,11 @@ class Auth extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'Nama Member', 'required|trim');
         $this->form_validation->set_rules('no_hp', 'Nomor Hp', 'required|trim|is_unique[makmur_pulsa_user.no_hp]', [
-            'is_unique' => 'Nomor HP Sudah Terdaftar..!!'
+            'is_unique' => '** Nomor Hp Sudah Terdaftar..!!'
         ]);
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-            'min_length' => 'Password Minimal 3 Karakter',
-            'matches' => 'Password Salah..!!'
+            'min_length' => '** Password Minimal 3 Karakter',
+            'matches' => '** Password Salah..!!'
         ]);
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
 
@@ -96,7 +96,7 @@ class Auth extends CI_Controller
                 'date_created' => time()
             ];
                 $this->db->insert('makmur_pulsa_user', $data);
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">SELAMAT.!! Kode Validasi Akun akan dikirim ke <?= $no_hp($no_hp); ?></div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">SELAMAT.!! Kode Validasi Akun akan dikirim ke <?= $no_hp; ?></div>');
                 redirect ('auth');
         }
     }
@@ -106,7 +106,7 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('role_id');
         
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Terimakasih...!!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">** Logout Berhasil...</div>');
         redirect('auth');
     }
 }
